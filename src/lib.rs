@@ -1,7 +1,6 @@
 use std::time::{Duration, Instant};
 
-/// Measure a function's execution time.
-/// Measurement is done only once.
+/// Measures the execution time of a function once and returns the duration.
 #[inline]
 pub fn bench_once<F, T>(f: F) -> Duration
 where
@@ -30,15 +29,14 @@ where
     vec.into_iter().min()
 }
 
-/// Calculates how many measurements is allowed in order to fit
-/// into the specified time limits.
+/// Calculates the number of iterations of `bench_once` that can be executed within a specified time limit.
 #[inline]
 pub fn calc_iterations(one_measurment_takes: Duration, desired_time: Duration) -> u32 {
     let mut div = 1;
     while desired_time / div > one_measurment_takes {
         div *= 10
     }
-    // For some reason, testing with unmodified answer takes 2x from..
-    // ..expected time, that's why there is a correction here.
+    // For some reason, testing with an unmodified answer takes twice the expected time;
+    // that's why there is a correction here.
     div / 2
 }
