@@ -32,10 +32,10 @@ pub fn bench_times<F, T>(iterations : u32, mut f : F) -> Option<Duration>
 
 /// Calculates the number of iterations of `bench_once` that can be executed within a specified time limit.
 #[inline]
-pub fn calc_iterations(one_measurment_takes : Duration, desired_time : Duration) -> u32
+pub fn calc_iterations(one_measurement_takes : Duration, desired_time : Duration) -> u32
 {
     let mut div = 1;
-    while desired_time / div > one_measurment_takes
+    while desired_time / div > one_measurement_takes
     { div *= 10 }
     // For some reason, testing with an unmodified answer takes twice the expected time;
     // that's why there is a correction here.
